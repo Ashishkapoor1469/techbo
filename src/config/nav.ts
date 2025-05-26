@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { HomeIcon, PackageIcon, Layers3Icon, UserCircle2Icon, SearchIcon, Wand2Icon } from 'lucide-react';
+import { HomeIcon, PackageIcon, Layers3Icon, UserCircle2Icon, SearchIcon, Wand2Icon, SettingsIcon } from 'lucide-react';
 
 export interface NavItemConfig {
   href: string;
@@ -17,6 +17,7 @@ export const sideNavItems: NavItemConfig[] = [
   { href: '/packages', label: 'Packages', icon: PackageIcon },
   { href: '/recommendations', label: 'AI Recs', icon: Wand2Icon },
   { href: '/profile', label: 'Profile', icon: UserCircle2Icon },
+  { href: '/settings', label: 'Settings', icon: SettingsIcon },
 ];
 
 // For BottomNav (limited items, specific order for Home icon in center)
@@ -27,3 +28,4 @@ export const bottomNavItems: NavItemConfig[] = [
   { href: '/frameworks', label: 'Frameworks', icon: Layers3Icon },
   { href: '/profile', label: 'Profile', icon: UserCircle2Icon },
 ];
+
