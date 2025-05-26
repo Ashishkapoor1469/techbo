@@ -44,7 +44,7 @@ export default function ProfilePage() {
         <CardHeader className="bg-muted/30 p-6 border-b">
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <Avatar className="h-24 w-24 sm:h-32 sm:w-32 border-4 border-background shadow-md">
-              <AvatarImage src={avatarUrl} alt={name} data-ai-hint={dataAiHint} />
+              <AvatarImage src={avatarUrl} alt={name} className="object-cover" data-ai-hint={dataAiHint} />
               <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
             <div className="flex-1">
