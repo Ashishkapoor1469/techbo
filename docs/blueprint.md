@@ -1,4 +1,4 @@
-# **App Name**: DevSpot
+# **App Name**: techbo
 
 ## Core Features:
 
