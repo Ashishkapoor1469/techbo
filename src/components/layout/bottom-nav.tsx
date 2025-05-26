@@ -1,30 +1,23 @@
+
 "use client";
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HomeIcon, PackageIcon, Layers3Icon, UserCircle2Icon, SearchIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const navItems = [
-  { href: '/search', label: 'Search', icon: SearchIcon },
-  { href: '/packages', label: 'Packages', icon: PackageIcon },
-  { href: '/', label: 'Home', icon: HomeIcon },
-  { href: '/frameworks', label: 'Frameworks', icon: Layers3Icon },
-  { href: '/profile', label: 'Profile', icon: UserCircle2Icon },
-];
+import { bottomNavItems, type NavItemConfig } from '@/config/nav'; // Use new config
 
 export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 h-16 bg-card border-t border-border shadow-t-md md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 h-16 bg-card border-t border-border shadow-t-md lg:hidden"> {/* Changed md:hidden to lg:hidden */}
       <div className="container mx-auto h-full">
         <ul className="flex justify-around items-center h-full">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
+          {bottomNavItems.map((item: NavItemConfig) => { // Use NavItemConfig
+            const isActive = item.exactMatch ? pathname === item.href : pathname.startsWith(item.href);
             return (
               <li key={item.href} className="flex-1">
-                <Link href={item.href} className="flex flex-col items-center justify-center h-full">
+                <Link href={item.href} className="flex flex-col items-center justify-center h-full p-1">
                   <item.icon
                     className={cn(
                       'h-6 w-6 mb-0.5',
