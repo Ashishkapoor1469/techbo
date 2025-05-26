@@ -1,4 +1,4 @@
-# **App Name**: techbo
+# **App Name**: Techbo
 
 ## Core Features:
 
