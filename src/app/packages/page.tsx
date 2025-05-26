@@ -10,44 +10,102 @@ const mockPackagesData: Package[] = [
   {
     id: 'tailwindcss',
     name: 'Tailwind CSS',
-    description: 'A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.',
+    description: 'A utility-first CSS framework for rapid UI development.',
+    detailedDescription: 'Tailwind CSS is a highly customizable, low-level CSS framework that gives you all of the building blocks you need to build bespoke designs without any annoying opinionated styles you have to fight to override. It works by scanning all of your HTML files, JavaScript components, and any other templates for class names, generating the corresponding styles and then writing them to a static CSS file.',
     logoUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'tailwind logo',
     version: '3.4',
-    tags: ['CSS', 'Utility-first', 'Styling'],
+    tags: ['CSS', 'Utility-first', 'Styling', 'Frontend'],
     repositoryUrl: 'https://github.com/tailwindlabs/tailwindcss',
     downloadUrl: 'https://www.npmjs.com/package/tailwindcss',
+    lastPublished: '2 days ago',
+    installation: 'npm install -D tailwindcss\nnpx tailwindcss init',
+    usage: 'Apply utility classes directly in your HTML: `<div class="bg-blue-500 text-white p-4">Hello</div>`',
+    exampleCode: `// tailwind.config.js
+module.exports = {
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}`,
+    exampleUrl: 'https://tailwindcss.com/docs/utility-first',
   },
   {
     id: 'shadcn-ui',
     name: 'ShadCN UI',
-    description: 'Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.',
+    description: 'Beautifully designed components that you can copy and paste into your apps.',
+    detailedDescription: 'ShadCN UI is not a component library. It\'s a collection of re-usable components that you can copy and paste into your apps. This means you have full control over the code and can customize them to your needs. Built with Radix UI and Tailwind CSS.',
     logoUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'shadcn logo',
     version: 'Latest',
-    tags: ['React', 'Components', 'UI Library'],
+    tags: ['React', 'Components', 'UI Library', 'TailwindCSS', 'Radix UI'],
     repositoryUrl: 'https://github.com/shadcn-ui/ui',
     downloadUrl: 'https://ui.shadcn.com/',
+    lastPublished: 'Frequently updated',
+    installation: 'npx shadcn-ui@latest add button (for example)',
+    usage: 'Import components into your React project: `import { Button } from "@/components/ui/button";`',
+    exampleCode: `import { Button } from "@/components/ui/button";
+
+function MyComponent() {
+  return <Button variant="outline">Click me</Button>;
+}`,
+    exampleUrl: 'https://ui.shadcn.com/docs/components/button',
   },
   {
     id: 'zod',
     name: 'Zod',
-    description: 'TypeScript-first schema validation with static type inference. The AIO Zod Object Description Language.',
+    description: 'TypeScript-first schema validation with static type inference.',
+    detailedDescription: 'Zod is a TypeScript-first schema declaration and validation library. It\'s designed to be as developer-friendly as possible. Define your schema once, and Zod will validate your data and infer the static TypeScript type. It\'s great for validating API inputs, form data, and more.',
     logoUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'zod logo',
     version: '3.23',
-    tags: ['TypeScript', 'Validation', 'Schema'],
+    tags: ['TypeScript', 'Validation', 'Schema', 'Data Integrity'],
     repositoryUrl: 'https://github.com/colinhacks/zod',
+    downloadUrl: 'https://www.npmjs.com/package/zod',
+    lastPublished: '1 week ago',
+    installation: 'npm install zod',
+    usage: 'Define schemas and parse data: `const mySchema = z.string(); mySchema.parse("hello");`',
+    exampleCode: `import { z } from "zod";
+
+const UserSchema = z.object({
+  username: z.string().min(3),
+  email: z.string().email(),
+});
+
+try {
+  const user = UserSchema.parse({ username: "usr", email: "test@example.com" });
+  console.log(user);
+} catch (e) {
+  console.error(e.errors);
+}`,
+    exampleUrl: 'https://zod.dev/?id=basic-usage',
   },
   {
     id: 'lucide-react',
     name: 'Lucide React',
-    description: 'A simply beautiful open-source icon set. Optimized for React applications.',
+    description: 'A simply beautiful open-source icon set, optimized for React applications.',
+    detailedDescription: 'Lucide is a community-maintained fork of Feather Icons, offering a comprehensive and consistent set of SVG icons. Lucide React provides easy-to-use React components for these icons, making it simple to integrate them into your projects.',
     logoUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'icon library',
     version: '0.300+',
-    tags: ['Icons', 'React', 'SVG'],
+    tags: ['Icons', 'React', 'SVG', 'UI'],
     repositoryUrl: 'https://github.com/lucide-icons/lucide',
+    downloadUrl: 'https://www.npmjs.com/package/lucide-react',
+    lastPublished: '3 days ago',
+    installation: 'npm install lucide-react',
+    usage: 'Import and use icons as components: `import { HomeIcon } from "lucide-react";`',
+    exampleCode: `import { HomeIcon, SettingsIcon } from "lucide-react";
+
+function MyComponent() {
+  return (
+    <div>
+      <HomeIcon size={24} />
+      <SettingsIcon className="text-blue-500" />
+    </div>
+  );
+}`,
+    exampleUrl: 'https://lucide.dev/guide/packages/lucide-react',
   },
 ];
 
@@ -95,3 +153,4 @@ export default function PackagesPage() {
     </section>
   );
 }
+

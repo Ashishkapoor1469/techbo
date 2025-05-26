@@ -22,7 +22,8 @@ export interface Post {
 export interface Framework {
   id: string;
   name: string;
-  description: string;
+  description: string; // Short description for cards
+  detailedDescription: string; // Longer description for detail page
   logoUrl: string;
   dataAiHint?: string;
   version?: string;
@@ -30,12 +31,16 @@ export interface Framework {
   websiteUrl: string;
   rating?: number;
   releaseDate?: string;
+  usage?: string; // General usage guidelines or key features
+  exampleCode?: string; // A small code snippet
+  exampleUrl?: string; // Link to a more comprehensive example or demo
 }
 
 export interface Package {
   id:string;
   name: string;
-  description: string;
+  description: string; // Short description for cards
+  detailedDescription: string; // Longer description for detail page
   logoUrl?: string;
   dataAiHint?: string;
   version: string;
@@ -44,6 +49,10 @@ export interface Package {
   repositoryUrl: string;
   author?: Author;
   lastPublished?: string;
+  installation?: string; // Installation instructions
+  usage?: string; // Basic usage example
+  exampleCode?: string; // A small code snippet
+  exampleUrl?: string; // Link to a more comprehensive example or demo
 }
 
 export interface UserProfile {
@@ -60,6 +69,9 @@ export interface UserProfile {
   location?: string;
   websiteUrl?: string;
   userPosts?: Post[];
-  userFrameworks?: Framework[];
-  userPackages?: Package[];
+  userFrameworks?: Framework[]; // Note: These would be simplified versions for profile display
+  userPackages?: Package[]; // Note: These would be simplified versions for profile display
 }
+
+// Simplified versions for profile lists, if needed, to avoid deeply nested full objects.
+// For now, UserProfile uses the full types.

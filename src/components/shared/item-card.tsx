@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { StarIcon, ArrowUpRightIcon, DownloadIcon, GitForkIcon } from 'lucide-react';
+import { StarIcon, ArrowUpRightIcon, DownloadIcon, GitForkIcon, ExternalLinkIcon } from 'lucide-react';
 import type { Framework, Package } from '@/types';
 
 interface ItemCardProps {
@@ -12,31 +12,38 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item, type }: ItemCardProps) {
-  const { name, description, logoUrl, dataAiHint, tags } = item;
+  const { id, name, description, logoUrl, dataAiHint, tags } = item;
   const version = 'version' in item ? item.version : undefined;
   const websiteUrl = 'websiteUrl' in item ? item.websiteUrl : undefined;
   const repositoryUrl = 'repositoryUrl' in item ? item.repositoryUrl : undefined;
   const downloadUrl = 'downloadUrl' in item ? item.downloadUrl : undefined;
   const rating = 'rating' in item ? item.rating : undefined;
 
+  const detailUrl = `/${type}s/${id}`;
 
   return (
     <Card className="overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
       <CardHeader className="flex flex-row items-start gap-4 space-y-0">
         {logoUrl && (
-          <div className="relative h-16 w-16 shrink-0">
-            <Image
-              src={logoUrl}
-              alt={`${name} logo`}
-              fill={true}
-              style={{objectFit: 'contain'}}
-              className="rounded-md"
-              data-ai-hint={dataAiHint}
-            />
-          </div>
+          <Link href={detailUrl} passHref>
+            <div className="relative h-16 w-16 shrink-0 cursor-pointer">
+              <Image
+                src={logoUrl}
+                alt={`${name} logo`}
+                fill={true}
+                style={{objectFit: 'contain'}}
+                className="rounded-md"
+                data-ai-hint={dataAiHint}
+              />
+            </div>
+          </Link>
         )}
         <div className="flex-1">
-          <CardTitle className="text-xl mb-1">{name}</CardTitle>
+          <CardTitle className="text-xl mb-1">
+            <Link href={detailUrl} className="hover:text-primary transition-colors">
+              {name}
+            </Link>
+          </CardTitle>
           {version && <CardDescription className="text-xs">Version {version}</CardDescription>}
           {typeof rating === 'number' && (
             <div className="flex items-center gap-1 mt-1">
@@ -57,10 +64,15 @@ export function ItemCard({ item, type }: ItemCardProps) {
         )}
       </CardContent>
       <CardFooter className="border-t pt-4 flex flex-wrap gap-2 justify-start">
+        <Button variant="default" size="sm" asChild>
+          <Link href={detailUrl}>
+            View Details <ArrowUpRightIcon className="ml-1.5 h-3.5 w-3.5" />
+          </Link>
+        </Button>
         {websiteUrl && (
           <Button variant="outline" size="sm" asChild>
             <Link href={websiteUrl} target="_blank" rel="noopener noreferrer">
-              Website <ArrowUpRightIcon className="ml-1.5 h-3.5 w-3.5" />
+              Website <ExternalLinkIcon className="ml-1.5 h-3.5 w-3.5" />
             </Link>
           </Button>
         )}
@@ -72,7 +84,7 @@ export function ItemCard({ item, type }: ItemCardProps) {
           </Button>
         )}
         {downloadUrl && (
-          <Button variant="default" size="sm" asChild>
+          <Button variant="secondary" size="sm" asChild>
             <Link href={downloadUrl} target="_blank" rel="noopener noreferrer">
              <DownloadIcon className="mr-1.5 h-3.5 w-3.5" /> Download
             </Link>
