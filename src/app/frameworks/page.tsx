@@ -1,8 +1,12 @@
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import { ItemCard } from '@/components/shared/item-card';
 import { FilterToolbar } from '@/components/shared/filter-toolbar';
 import type { Framework } from '@/types';
 
-const mockFrameworks: Framework[] = [
+const mockFrameworksData: Framework[] = [
   {
     id: 'nextjs',
     name: 'Next.js',
@@ -47,10 +51,22 @@ const mockFrameworks: Framework[] = [
 ];
 
 export default function FrameworksPage() {
-  // TODO: Implement search and filter logic
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredFrameworks, setFilteredFrameworks] = useState<Framework[]>(mockFrameworksData);
+
   const handleSearch = (query: string) => {
-    console.log('Searching frameworks:', query);
+    setSearchQuery(query);
   };
+
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const filtered = mockFrameworksData.filter(framework =>
+      framework.name.toLowerCase().includes(lowerCaseQuery) ||
+      framework.description.toLowerCase().includes(lowerCaseQuery) ||
+      framework.tags.some(tag => tag.toLowerCase().includes(lowerCaseQuery))
+    );
+    setFilteredFrameworks(filtered);
+  }, [searchQuery]);
 
   return (
     <section className="space-y-8">
@@ -64,11 +80,17 @@ export default function FrameworksPage() {
         searchPlaceholder="Search frameworks..." 
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockFrameworks.map((framework) => (
-          <ItemCard key={framework.id} item={framework} type="framework" />
-        ))}
-      </div>
+      {filteredFrameworks.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredFrameworks.map((framework) => (
+            <ItemCard key={framework.id} item={framework} type="framework" />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-muted-foreground py-8">
+          No frameworks found matching &quot;{searchQuery}&quot;.
+        </p>
+      )}
     </section>
   );
 }

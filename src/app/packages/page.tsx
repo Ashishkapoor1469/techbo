@@ -1,8 +1,12 @@
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import { ItemCard } from '@/components/shared/item-card';
 import { FilterToolbar } from '@/components/shared/filter-toolbar';
 import type { Package } from '@/types';
 
-const mockPackages: Package[] = [
+const mockPackagesData: Package[] = [
   {
     id: 'tailwindcss',
     name: 'Tailwind CSS',
@@ -48,10 +52,22 @@ const mockPackages: Package[] = [
 ];
 
 export default function PackagesPage() {
-  // TODO: Implement search and filter logic
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredPackages, setFilteredPackages] = useState<Package[]>(mockPackagesData);
+
   const handleSearch = (query: string) => {
-    console.log('Searching packages:', query);
+    setSearchQuery(query);
   };
+
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const filtered = mockPackagesData.filter(pkg =>
+      pkg.name.toLowerCase().includes(lowerCaseQuery) ||
+      pkg.description.toLowerCase().includes(lowerCaseQuery) ||
+      pkg.tags.some(tag => tag.toLowerCase().includes(lowerCaseQuery))
+    );
+    setFilteredPackages(filtered);
+  }, [searchQuery]);
 
   return (
     <section className="space-y-8">
@@ -65,11 +81,17 @@ export default function PackagesPage() {
         searchPlaceholder="Search packages..."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockPackages.map((pkg) => (
-          <ItemCard key={pkg.id} item={pkg} type="package" />
-        ))}
-      </div>
+      {filteredPackages.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPackages.map((pkg) => (
+            <ItemCard key={pkg.id} item={pkg} type="package" />
+          ))}
+        </div>
+      ) : (
+         <p className="text-center text-muted-foreground py-8">
+          No packages found matching &quot;{searchQuery}&quot;.
+        </p>
+      )}
     </section>
   );
 }
