@@ -4,7 +4,7 @@ import { SettingsIcon } from 'lucide-react';
 import { PostFeed } from '@/components/home/post-feed';
 import { Logo } from '@/components/shared/logo';
 import { Button } from '@/components/ui/button';
-
+import Airoute from '@/components/shared/airoute';
 export default function HomePage() {
   return (
     <div className="space-y-8">
@@ -23,6 +23,7 @@ export default function HomePage() {
         </h1>
         <PostFeed />
       </section>
+      <Airoute />
     </div>
   );
 }
