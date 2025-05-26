@@ -24,7 +24,7 @@ const mockUserProfile: UserProfile = {
     { id: 'p1', type: 'article', title: 'My Top 3 Dev Tools', excerpt: 'Sharing tools I use daily.', author: { name: 'Alex Johnson', avatarUrl: 'https://placehold.co/40x40.png', profileUrl: '/profile' }, timestamp: '3 days ago', likes: 15, comments: 2, imageUrl: 'https://placehold.co/600x300.png', dataAiHint: 'desk setup' },
   ],
   userFrameworks: [
-    { id: 'nextjs-fav', name: 'Next.js', description: 'Primary framework for web apps.', logoUrl: 'https://placehold.co/64x64.png', dataAiHint: 'nextjs logo', tags: ['React'], websiteUrl: '#' },
+    { id: 'nextjs-fav', name: 'Next.js', description: 'Primary framework for web apps.', logoUrl: 'https://placehold.co/64x64.png', dataAiHint: 'nextjs logo', tags: ['React'], websiteUrl: '#', rating: 4.9 },
   ],
   userPackages: [
     { id: 'zod-fav', name: 'Zod', description: 'For schema validation.', logoUrl: 'https://placehold.co/64x64.png', dataAiHint: 'zod logo', version: '3.23', tags: ['Validation'], repositoryUrl: '#' },

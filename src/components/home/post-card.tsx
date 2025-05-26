@@ -15,7 +15,7 @@ export function PostCard({ post }: PostCardProps) {
   const { title, excerpt, author, imageUrl, dataAiHint, timestamp, likes, comments, tags, type, link } = post;
 
   return (
-    <Card className="overflow-hidden flex flex-col h-full_ shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
+    <Card className="overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
       {imageUrl && (
         <Link href={link || '#'} passHref legacyBehavior>
         <a className="block aspect-video relative overflow-hidden">

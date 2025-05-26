@@ -38,7 +38,7 @@ export function ItemCard({ item, type }: ItemCardProps) {
         <div className="flex-1">
           <CardTitle className="text-xl mb-1">{name}</CardTitle>
           {version && <CardDescription className="text-xs">Version {version}</CardDescription>}
-          {rating && (
+          {typeof rating === 'number' && (
             <div className="flex items-center gap-1 mt-1">
               <StarIcon className="h-4 w-4 text-yellow-400 fill-yellow-400" />
               <span className="text-xs text-muted-foreground">{rating.toFixed(1)}</span>
