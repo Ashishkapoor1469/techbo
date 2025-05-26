@@ -18,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'DevSpot',
+  title: 'Techbo',
   description: 'Discover and share dev tools, frameworks, and packages.',
+
 };
 
 export default function RootLayout({

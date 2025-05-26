@@ -8,7 +8,7 @@ export function Logo({ size = 'default' }: { size?: 'sm' | 'default' | 'lg' }) {
   return (
     <Link href="/" className="flex items-center gap-2 group" aria-label="DevSpot Home">
       <CodeXmlIcon className={`${iconSize} text-primary group-hover:text-primary/90 transition-colors`} />
-      <span className={`${textSize} font-bold text-foreground group-hover:text-primary transition-colors`}>DevSpot</span>
+      <span className={`${textSize} font-bold text-foreground group-hover:text-primary transition-colors`}>Techbo</span>
     </Link>
   );
 }

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ThemeToggle } from '@/components/settings/theme-toggle';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { Switch } from '@radix-ui/react-switch';
 
 export default function SettingsPage() {
   return (
@@ -32,7 +33,7 @@ export default function SettingsPage() {
             <ThemeToggle />
           </div>
           {/* Example of another setting item structure */}
-          {/* <Separator />
+          <Separator />
           <div className="flex items-center justify-between space-x-2 p-4 border rounded-lg">
             <div className="space-y-0.5">
               <Label htmlFor="notifications-toggle" className="text-base font-medium">
@@ -43,7 +44,7 @@ export default function SettingsPage() {
               </p>
             </div>
             <Switch id="notifications-toggle" disabled />
-          </div> */}
+          </div>
         </CardContent>
       </Card>
       
