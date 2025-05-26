@@ -132,7 +132,7 @@ export function RecommendationClientPage() {
                 {recommendations.frameworkRecommendations.map((fw, index) => (
                   <ItemCard 
                     key={`${fw.name}-${index}`} 
-                    item={{ ...fw, id: `${fw.name}-${index}`, logoUrl: `https://placehold.co/64x64.png`, dataAiHint: 'framework logo', tags: [], websiteUrl: fw.url }} 
+                    item={{ ...fw, id: `${fw.name}-${index}`, logoUrl: ``, dataAiHint: 'framework logo', tags: [], websiteUrl: fw.url }} 
                     type="framework" 
                   />
                 ))}
@@ -147,7 +147,7 @@ export function RecommendationClientPage() {
                 {recommendations.packageRecommendations.map((pkg, index) => (
                   <ItemCard 
                     key={`${pkg.name}-${index}`} 
-                    item={{ ...pkg, id: `${pkg.name}-${index}`, logoUrl: `https://placehold.co/64x64.png`, dataAiHint: 'package logo', tags: [], version: 'N/A', repositoryUrl: pkg.url }} 
+                    item={{ ...pkg, id: `${pkg.name}-${index}`, logoUrl: ``, dataAiHint: 'package logo', tags: [], version: 'N/A', repositoryUrl: pkg.url }} 
                     type="package" 
                   />
                 ))}
