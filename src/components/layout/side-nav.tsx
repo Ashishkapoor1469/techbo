@@ -31,7 +31,7 @@ export default function SideNav() {
                   )}
                 >
                   <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
+                  <span className=''>{item.label}</span>
                 </Link>
               </li>
             );

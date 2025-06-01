@@ -24,7 +24,7 @@ export function PostCard({ post }: PostCardProps) {
               alt={title}
               fill={true}
               style={{objectFit: 'cover'}}
-              className="hover:scale-105 transition-transform duration-300"
+              className="hover:scale-105 transition-transform duration-300 object-cover"
               data-ai-hint={dataAiHint}
             />
           </a>

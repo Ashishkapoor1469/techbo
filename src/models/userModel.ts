@@ -1,15 +1,22 @@
 import mongoose,{Schema,Document} from "mongoose";
 
 export interface IuserPost extends Document{
+    id: string; 
+    type: "article" | "package" | "user_update";
     title: string;
-    content: string;
-    imageUrl: string;
-    createsAt?: Date;
-    updatedAt?: Date;
+    excerpt?: string;
+    author: {
+        name: string;
+        avatarUrl?: string;
+        profileUrl?: string;
+    };
+    imageUrl?: string;
+    dataAiHint?: string;
+    timestamp?: string;
     likes?: number;
-    comments?: string[];
-    userId: string; // Reference to the user who created the post
-    category?: string; // Optional category field
+    comments?: number;
+    tags?: string[];
+    link?: string;
 }
 export interface IUser extends Document {
     username: string;
@@ -18,6 +25,7 @@ export interface IUser extends Document {
     createdAt?: Date;
     updatedAt?: Date;
     isAdmin?: boolean;
+    isVerified: boolean;
     forgotPasswordToken?: string;
     forgetpasswordExpiry?: Date;
     verifyToken?: string;
@@ -25,43 +33,14 @@ export interface IUser extends Document {
     Post:IuserPost[];
 }
 const PostSchema: Schema<IuserPost> = new mongoose.Schema({
-    title: {
-        type: String,
-        required: [true, "Title is required"],
-    },
-    content: {
-        type: String,
-        required: [true, "Content is required"],
-    },
-    imageUrl: {
-        type: String,
-        required: [true, "Image URL is required"],
-    },
-    // createdAt: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
-    // updatedAt: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
-    likes: {
-        type: Number,
-        default: 0,
-    },
-    comments: {
-        type: [String],
-        default: [],
-    },
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'user',
-    //     required: true,
-    // },
-    category:{
-        type:String,
-        default:"General"
-    }
+    
+    id: { type: String, required: true },
+    type: { type: String, enum: ["article", "package", "user_update"], required: true },
+    title: { type: String, required: true, maxlength: 100 },
+    excerpt: { type: String, maxlength: 500 },
+
+        
+
 });
 
 const userSchema:Schema<IUser> = new mongoose.Schema({
@@ -89,6 +68,10 @@ const userSchema:Schema<IUser> = new mongoose.Schema({
         default: Date.now,
     },
     isAdmin:{
+        type: Boolean,
+        default: false,
+    },
+    isVerified: {
         type: Boolean,
         default: false,
     },

@@ -19,7 +19,10 @@ interface FilterToolbarProps {
   // TODO: Add filter options and callbacks
 }
 
-export function FilterToolbar({ onSearchChange, searchPlaceholder = "Search..." }: FilterToolbarProps) {
+export function FilterToolbar({
+  onSearchChange,
+  searchPlaceholder = "Search...",
+}: FilterToolbarProps) {
   const [showStatusBar, setShowStatusBar] = React.useState(true); // Example filter
   const [showActivityBar, setShowActivityBar] = React.useState(false); // Example filter
 
@@ -58,8 +61,8 @@ export function FilterToolbar({ onSearchChange, searchPlaceholder = "Search..." 
             Activity Bar
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
-            // checked={showPanel} Example
-            // onCheckedChange={setShowPanel} Example
+          // checked={showPanel} Example
+          // onCheckedChange={setShowPanel} Example
           >
             Panel
           </DropdownMenuCheckboxItem>

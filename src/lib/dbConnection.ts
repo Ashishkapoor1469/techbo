@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 type connectionType = {
-  isConnected?: number | null;
+  isConnected?: number;
 };
 const connection: connectionType = {};
 
@@ -10,7 +10,7 @@ export async function dbconnect(): Promise<void> {
     return;
   }
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI as string, {});
+    const db = await mongoose.connect(process.env.MONGODB_URI ||'', {});
     connection.isConnected = db.connections[0].readyState;
     console.log("Connected to the database");
     
