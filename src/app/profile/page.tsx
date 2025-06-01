@@ -21,13 +21,13 @@ const mockUserProfile: UserProfile = {
   location: "Himachal perdesh, Chamba",
   websiteUrl: "https://portfolio-phi-ivory-91.vercel.app/",
   userPosts: [
-    { id: 'p1', type: 'article', title: 'My Top 3 Dev Tools', excerpt: 'Sharing tools I use daily.', author: { name: 'Alex Johnson', avatarUrl: 'https://placehold.co/40x40.png', profileUrl: '/profile' }, timestamp: '3 days ago', likes: 15, comments: 2, imageUrl: 'https://placehold.co/600x300.png', dataAiHint: 'desk setup' },
+    { id: 'p1', type: 'article', title: 'My Top 3 Dev Tools', excerpt: 'Sharing tools I use daily.', author: { name: 'Alex Johnson', avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3uyGC8BAZpeOpAnLAyHHz0xeNQlNup1v9A&s', profileUrl: '/profile' }, timestamp: '3 days ago', likes: 15, comments: 2, imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3uyGC8BAZpeOpAnLAyHHz0xeNQlNup1v9A&s', dataAiHint: 'desk setup' },
   ],
   userFrameworks: [
-    { id: 'nextjs-fav', name: 'Next.js', description: 'Primary framework for web apps.', logoUrl: 'https://placehold.co/64x64.png', dataAiHint: 'nextjs logo', tags: ['React'], websiteUrl: '#', rating: 4.9 },
+    { id: 'nextjs-fav', name: 'Next.js', description: 'Primary framework for web apps.', logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMZD7gtOg-aRXiYZ_ZkmYGch46UxHAygL-Pw&s', dataAiHint: 'nextjs logo', tags: ['React'], websiteUrl: '#', rating: 4.9 },
   ],
   userPackages: [
-    { id: 'zod-fav', name: 'Zod', description: 'For schema validation.', logoUrl: 'https://placehold.co/64x64.png', dataAiHint: 'zod logo', version: '3.23', tags: ['Validation'], repositoryUrl: '#' },
+    { id: 'zod-fav', name: 'Zod', description: 'For schema validation.', logoUrl: 'https://zod.dev/?id=basic-usage', dataAiHint: 'zod logo', version: '3.23', tags: ['Validation'], repositoryUrl: '#' },
   ],
 };
 
