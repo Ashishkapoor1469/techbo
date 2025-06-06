@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import BottomNav from "@/components/layout/bottom-nav";
 import MainLayout from "@/components/layout/main-layout";
 import { ThemeProvider } from '@/providers/theme-provider';
-
+import AuthProviders from '@/context/AuthProviders';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -30,6 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <AuthProviders>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
         <ThemeProvider
           defaultTheme="light"
@@ -42,6 +43,7 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
       </body>
+      </AuthProviders>
     </html>
   );
 }
