@@ -3,7 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import IMg from "@/photos/techbo-high-resolution-logo (1).png"
+import IMg from "@/photos/techbo-high-resolution-logo (1).png";
 export default function Component() {
   const { data: session } = useSession();
 
@@ -22,14 +22,15 @@ export default function Component() {
               alt="TechBo Logo"
               width={80}
               height={80}
-              className="grayscale mb-4 bg-inherit rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300" 
+              className="grayscale mb-4 bg-inherit rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300"
               priority
             />
           </div>
           {session ? (
             <>
               <p className="text-lg text-gray-800 mb-4 text-center">
-                Signed in as <span className="font-semibold">{session.user.email}</span>
+                Signed in as{session.user.email? session.user.email : " "}
+                <span className="font-semibold">{session.user.email}</span>
               </p>
               <Button
                 variant="default"
@@ -46,7 +47,7 @@ export default function Component() {
               </p>
               <Button
                 variant="default"
-                className="w-full bg-gradient-to-r from-black to-gray-800 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-transform"
+                className="w-full bg-gradient-to-r from-black to-gray-800 text-white font-bold rounded-xl shadow-lg hover:scale-101 transition-transform"
                 onClick={() => signIn()}
               >
                 Sign in with your account
