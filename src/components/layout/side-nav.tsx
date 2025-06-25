@@ -40,7 +40,7 @@ export default function SideNav() {
       </nav>
       {/* You can add a footer to the sidebar here if needed */}
       {/* <div className="p-4 border-t border-border">
-        <p className="text-xs text-muted-foreground">© 2024 DevSpot</p>
+        <p className="text-xs text-muted-foreground">© 2024 CODEAXE</p>
       </div> */}
     </aside>
   );

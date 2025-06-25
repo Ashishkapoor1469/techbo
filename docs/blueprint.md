@@ -1,4 +1,4 @@
-# **App Name**: Techbo
+# **App Name**: CODEAXE
 
 ## Core Features:
 
