@@ -23,7 +23,7 @@ export interface Framework {
   id: string;
   name: string;
   description: string; // Short description for cards
-  detailedDescription: string; // Longer description for detail page
+  detailedDescription?: string; // Longer description for detail page
   logoUrl: string;
   dataAiHint?: string;
   version?: string;
@@ -40,7 +40,7 @@ export interface Package {
   id:string;
   name: string;
   description: string; // Short description for cards
-  detailedDescription: string; // Longer description for detail page
+  detailedDescription?: string; // Longer description for detail page
   logoUrl?: string;
   dataAiHint?: string;
   version: string;

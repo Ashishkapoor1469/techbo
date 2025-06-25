@@ -54,7 +54,7 @@ const page = () => {
       }
     };
     checkusernameunique();
-  }, [deboucedUsername]);
+  }, []);
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
     setIsSubmitting(true);
     try {
@@ -89,7 +89,9 @@ const page = () => {
         </div>
         <div>
           <Form {...form}>
-
+            <div>
+              
+            </div>
           </Form>
         </div>
       </div>
