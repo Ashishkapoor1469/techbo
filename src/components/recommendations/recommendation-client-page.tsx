@@ -81,7 +81,7 @@ export function RecommendationClientPage() {
                       <Input placeholder="e.g., 'lightweight UI library for real-time charts'" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Describe what you're looking for or the problem you're trying to solve.
+                      Describe what you{`'`}re looking for or the problem you{`'`}re trying to solve.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

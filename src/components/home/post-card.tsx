@@ -12,7 +12,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
-  const { title, excerpt, author, imageUrl, dataAiHint, timestamp, likes, comments, tags, type, link } = post;
+  const { title, excerpt, author, imageUrl, dataAiHint, timestamp, likes, comments, tags, link } = post;
 
   return (
     <Card className="overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">

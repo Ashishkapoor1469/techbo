@@ -1,14 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Edit3Icon,
   MapPinIcon,
   LinkIcon,
   CalendarDaysIcon,
 } from "lucide-react";
-import type { UserProfile, Post, Framework, Package } from "@/types";
+import type { UserProfile } from "@/types";
 import { PostCard } from "@/components/home/post-card"; // Re-use PostCard for user posts
 import { ItemCard } from "@/components/shared/item-card"; // Re-use ItemCard for user frameworks/packages
 import Link from "next/link";

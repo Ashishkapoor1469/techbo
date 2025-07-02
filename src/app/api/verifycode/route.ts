@@ -1,7 +1,7 @@
 import { dbconnect } from "@/lib/dbConnection";
 import User from "@/models/userModel";
-import {z} from "zod";
-import {validUser} from "@/schemas/signUpSchema";
+// import {z} from "zod";
+// import {validUser} from "@/schemas/signUpSchema";
 
 export async function POST(request: Request) {
 await dbconnect();

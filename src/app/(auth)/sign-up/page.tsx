@@ -13,7 +13,6 @@ import { ApiResponse } from "@/types/ApiRespones";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-const page = () => {
+const Page = () => {
   const [username, setUsername] = useState("");
   const [usernamemessage, setUsernamemessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +46,6 @@ const page = () => {
       if (username) {
         setCheckusername(true);
         setUsernamemessage("");
-
         try {
           const responce = await axios.get(
             `/api/auth/checkusername-unique?username=${username}`
@@ -70,6 +68,13 @@ const page = () => {
     setIsSubmitting(true);
     try {
       const resonce = await axios.post<ApiResponse>("/api/auth/sign-up");
+
+      //temp part/////////////////////////////////
+      console.log(resonce);
+      setLoading(true);
+      console.log(data);
+      
+      /////////////////////////////
       toast({
         title: "Success",
         description:
@@ -168,8 +173,11 @@ isSubmitting ?<><Loader2 className="h-4 w-4 animate-spin" />Please wait</>:("Sig
           </div>
         </div>
       </div>
+      <div>
+        {loading?"":""}
+      </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
