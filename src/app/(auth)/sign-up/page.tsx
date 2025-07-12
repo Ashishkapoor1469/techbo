@@ -28,7 +28,7 @@ const Page = () => {
   const [usernamemessage, setUsernamemessage] = useState("");
   const [loadingUsername, setLoadingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const debounced = useDebounceCallback(setUsername, 900);
+  const debounced = useDebounceCallback(setUsername, 1000);
   const router = useRouter();
   const { toast } = useToast();
 
