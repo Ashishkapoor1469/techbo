@@ -48,13 +48,14 @@ export async function POST(request: Request) {
       const expirydate = new Date();
       expirydate.setHours(expirydate.getHours() + 24);
       const newUser = new User({
-        username: username,
+        username,
         email,
         password: hashpassword,
         createdAt: Date.now(),
         isVerified: false,
         verifycode,
         verifyTokenExpiry: expirydate,
+        isAcceptingMessage: true,
         Post: [],
       });
       await newUser.save();

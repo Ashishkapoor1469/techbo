@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface Message extends Document{
+export interface Message extends Document {
   content: string;
   createdAt: Date;
 }
@@ -39,10 +39,10 @@ export interface IUser extends Document {
   Messages: Message[];
 }
 
-const MessageSchema: Schema<Message> = new Schema({
-  content:{
-    type:String,
-    required:true,
+const MessageSchema: Schema = new Schema({
+  content: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -50,7 +50,7 @@ const MessageSchema: Schema<Message> = new Schema({
     default: Date.now,
   },
 });
-const PostSchema: Schema<IuserPost> = new mongoose.Schema({
+const PostSchema: Schema = new mongoose.Schema({
   id: { type: String, required: true },
   type: {
     type: String,
@@ -59,6 +59,18 @@ const PostSchema: Schema<IuserPost> = new mongoose.Schema({
   },
   title: { type: String, required: true, maxlength: 100 },
   excerpt: { type: String, maxlength: 500 },
+  author: {
+    name: String,
+    avatarUrl: String,
+    profileUrl: String,
+  },
+  imageUrl: String,
+  dataAiHint: String,
+  timestamp: String,
+  likes: Number,
+  comments: Number,
+  tags: [String],
+  link: String,
 });
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
@@ -101,7 +113,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
   verifyToken: String,
   verifyTokenExpiry: Date,
   Post: [PostSchema], // Embedding posts directly in the user schema
-  Messages:[MessageSchema]
+  Messages: [MessageSchema],
 });
 
 const User =

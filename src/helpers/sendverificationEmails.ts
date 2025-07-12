@@ -12,7 +12,7 @@ try {
         to: email,
         subject: "Email Verification",
         react: VerificationEmail({
-            username: username,
+             username,
             otp: verfiycode
         }),
     })

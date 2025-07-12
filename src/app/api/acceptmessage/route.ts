@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {   ///request: Request
+export async function GET() {  ///request: Request
   const session = await getServerSession(authOption);
   const user = session?.user;
   if (!session || !session.user) {

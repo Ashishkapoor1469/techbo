@@ -11,7 +11,7 @@ export default function airoute() {
       >
         {/* Using Link to navigate to recommendations page */}
         <Link href={"/recommendations"} className="flex items-center gap-2">
-          <Brush className="h-4 w-4" />
+          <Brush className="h-4 w-4 text-primary-foreground" />
         </Link>
       </Button>
     </>
