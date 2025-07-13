@@ -28,7 +28,7 @@ const Page = () => {
   const [usernamemessage, setUsernamemessage] = useState("");
   const [loadingUsername, setLoadingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const debounced = useDebounceCallback(setUsername, 1000);
+  const debounced = useDebounceCallback(setUsername, 300);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -71,7 +71,7 @@ const Page = () => {
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post<ApiResponse>("/api/auth/sign-up", data);
+      const response = await axios.post<ApiResponse>("/api/sign-up",data);
    ///////////////////////
       console.log(response);
    ///////////////////////
