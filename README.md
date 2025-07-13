@@ -26,16 +26,22 @@
 - *Icons:* Lucide React
 
 ## 📁 Folder Structure
+project-root/
+/project-root/
+├── app/ # App routes and pages
+│ ├── (auth)/ # Auth routes
+│ ├── dashboard/ # Dashboard routes
+│ └── api/ # API handlers
+├── components/ # UI components
+├── lib/ # Utils and DB connection
+├── hooks/ # React hooks
+├── types/ # TypeScript types
+├── public/ # Static assets
+├── .env.local # Environment variables
+├── README.md # Documentation
+├── package.json # Project dependencies
+└── tsconfig.json # TypeScript config
 
--/app
-  -/(auth)         # Login/Signup routes
-  -/api            # API routes (e.g., auth, post, checkusername)
-  -/profile        # User profile pages
-  -/dashboard      # Main logged-in dashboard
--/lib               # DB & utility functions
--/components        # UI components (form, card, dialog, etc.)
--/hooks             # Custom React hooks
--/types             # TypeScript types
 
 
 ## 📃 License
