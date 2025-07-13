@@ -1,6 +1,6 @@
 # CodeAxe 🪓
 
-> A modern community-driven code-sharing platform where developers can showcase their work, connect through profiles, and collaborate through posts.
+> A modern community-driven code-sharing and Sugguested frameworks/packages platform where developers can showcase their work, connect through profiles, and collaborate through posts.
 
 ## 🌐 Live Preview
 
@@ -25,9 +25,30 @@
 - *Emails:* Resend API
 - *Icons:* Lucide React
 
+## folder structure
+
+/app
+  /(auth)         # Login/Signup routes
+  /api            # API routes (e.g., auth, post, checkusername)
+  /profile        # User profile pages
+  /dashboard      # Main logged-in dashboard
+/lib               # DB & utility functions
+/components        # UI components (form, card, dialog, etc.)
+/hooks             # Custom React hooks
+/types             # TypeScript types
+
+
+## 📃 License
+
+This project is licensed under the [MIT License](./LICENSE).
+, ![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
+
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/codeaxe.git
+git clone https://github.com/Ashishkapoor1469/techbo.git
 cd codeaxe
 pnpm install  # or yarn / npm
+
+
+
