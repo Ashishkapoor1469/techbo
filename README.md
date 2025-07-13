@@ -26,6 +26,7 @@
 - *Icons:* Lucide React
 
 ## 📁 Folder Structure
+```
 project-root/
 /project-root/
 ├── app/ # App routes and pages
@@ -42,7 +43,7 @@ project-root/
 ├── package.json # Project dependencies
 └── tsconfig.json # TypeScript config
 
-
+```
 
 ## 📃 License
 
