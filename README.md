@@ -25,7 +25,7 @@
 - *Emails:* Resend API
 - *Icons:* Lucide React
 
-## folder structure
+## 📁 Folder Structure
 
 /app
   /(auth)         # Login/Signup routes
@@ -49,6 +49,5 @@ This project is licensed under the [MIT License](./LICENSE).
 git clone https://github.com/Ashishkapoor1469/techbo.git
 cd codeaxe
 pnpm install  # or yarn / npm
-
 
 
