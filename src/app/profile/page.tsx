@@ -17,7 +17,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
-const [data, setdata] = useState(null);
+const [data, setdata] = useState({});
 
 const mockUserProfile: UserProfile = {
   id: "user123",
@@ -80,15 +80,15 @@ const mockUserProfile: UserProfile = {
   ],
 };
 
-useEffect(()=>{
-axios.get("/api/userdetails")
-.then((response) => {
-  setdata(response.data);
-}
-).catch((error) => {
-  console.error("Error fetching user details:", error);
-});
-},[])
+// useEffect(()=>{
+// axios.get("/api/userdetails")
+// .then((response) => {
+//   setdata(response.data);
+// }
+// ).catch((error) => {
+//   console.error("Error fetching user details:", error);
+// });
+// },[])
 
 export default function ProfilePage() {
   const {
