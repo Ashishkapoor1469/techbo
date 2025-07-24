@@ -120,3 +120,7 @@ const User =
   (mongoose.models.user as mongoose.Model<IUser>) ||
   mongoose.model<IUser>("user", userSchema);
 export default User;
+
+const Post = (mongoose.models.Post as mongoose.Model<IuserPost>) ||
+  mongoose.model<IuserPost>("Post", PostSchema);
+  export { Post };

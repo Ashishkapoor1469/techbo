@@ -1,3 +1,4 @@
+"use client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,6 +13,11 @@ import type { UserProfile } from "@/types";
 import { PostCard } from "@/components/home/post-card"; // Re-use PostCard for user posts
 import { ItemCard } from "@/components/shared/item-card"; // Re-use ItemCard for user frameworks/packages
 import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+
+const [data, setdata] = useState(null);
 
 const mockUserProfile: UserProfile = {
   id: "user123",
@@ -73,6 +79,16 @@ const mockUserProfile: UserProfile = {
     },
   ],
 };
+
+useEffect(()=>{
+axios.get("/api/userdetails")
+.then((response) => {
+  setdata(response.data);
+}
+).catch((error) => {
+  console.error("Error fetching user details:", error);
+});
+},[])
 
 export default function ProfilePage() {
   const {
