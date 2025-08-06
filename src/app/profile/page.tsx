@@ -17,7 +17,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
-const [data, setdata] = useState({});
+// const [data, setdata] = useState({});
 
 const mockUserProfile: UserProfile = {
   id: "user123",
