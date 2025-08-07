@@ -23,6 +23,7 @@ type Post = {
   tags?: string[];
   likes?: number;
   comments?: number;
+  link?:string;
 };
 
 export default function PostList() {
@@ -150,9 +151,9 @@ return()=>{
             <span className="text-xs">{post.comments}</span>
           </Button>
         </div>
-        {post.imageUrl && (
+        {post.link && (
           <Button variant="outline" size="sm" asChild>
-            <Link href={post.imageUrl}>
+            <Link href={post.link}>
               Read More <ArrowUpRightIcon className="ml-1.5 h-4 w-4" />
             </Link>
           </Button>
