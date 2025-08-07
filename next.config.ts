@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: ['upload.wikimedia.org', 'raw.githubusercontent.com', 'images.unsplash.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -183,7 +184,8 @@ const nextConfig: NextConfig = {
         hostname: 'encrypted-tbn0.gstatic.com',
         port: '',
         pathname: '/**',
-        }
+        },
+        
     ],
   },
 };
