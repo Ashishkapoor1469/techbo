@@ -69,7 +69,7 @@ const Page = () => {
   }
 
   if(result?.url){
-    router.replace('/profile')
+    router.push('/profile')
   }
 
   
