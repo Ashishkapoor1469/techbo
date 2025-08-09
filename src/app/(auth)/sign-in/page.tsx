@@ -70,7 +70,7 @@ const router = useRouter();
   }
 
   if(result?.url){
-    router.replace('/profile')
+    router.push('/profile')
   }
 toast({
   title:"Login successful",
