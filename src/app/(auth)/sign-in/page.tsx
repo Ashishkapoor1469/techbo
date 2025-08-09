@@ -45,7 +45,7 @@ const router = useRouter();
     setIsSubmitting(true);
   try {
       const result = await signIn('credentials',{
-    redirect: false,
+    redirect: true,
     identifier: data.identifier,
     password: data.password,
     callbackUrl:"/profile"
