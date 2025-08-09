@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 // import { useDebounceCallback } from "usehooks-ts";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
+
+import { redirect,useRouter } from "next/navigation";
 // import axios, { AxiosError } from "axios";
 import { signInSchema } from "@/schemas/signInSchema";
 // import { ApiResponse } from "@/types/ApiRespones";
@@ -27,9 +28,8 @@ import { signIn } from "next-auth/react";
 const Page = () => {
  
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
   const { toast } = useToast();
-
+const router = useRouter();
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -43,7 +43,8 @@ const Page = () => {
 // Form Submit
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
     setIsSubmitting(true);
-   const result = await signIn('credentials',{
+  try {
+      const result = await signIn('credentials',{
     redirect: false,
     identifier: data.identifier,
     password: data.password,
@@ -69,9 +70,20 @@ const Page = () => {
   }
 
   if(result?.url){
-    router.push('/profile')
+    router.replace('/profile')
   }
-
+toast({
+  title:"Login successful",
+  variant:"default"
+})
+  } catch (error) {
+     toast({
+      title:"failed login",
+      description:`${error}`,
+      variant:"destructive",
+     })
+  }
+  
   
   };
 
