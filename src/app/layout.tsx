@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Techbo',
+  title: 'CodeAxe',
   description: 'Discover and share dev tools, frameworks, and packages.',
 
 };
