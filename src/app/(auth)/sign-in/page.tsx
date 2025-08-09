@@ -23,7 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 const Page = () => {
  
@@ -71,7 +71,7 @@ const router = useRouter();
   }
 
   if(result?.url){
-    router.refresh();
+    await getSession();
     router.push(result.url||'/profile')
   }
 toast({
