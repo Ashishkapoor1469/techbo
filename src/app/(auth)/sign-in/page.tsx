@@ -71,6 +71,7 @@ const router = useRouter();
   }
 
   if(result?.url){
+    router.refresh();
     router.push(result.url||'/profile')
   }
 toast({
