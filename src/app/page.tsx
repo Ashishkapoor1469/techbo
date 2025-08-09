@@ -40,6 +40,7 @@ export default function PostList() {
     try {
       const res = await fetch(`/api/posts?skip=${skip}&limit=10`);
       const data: Post[] = await res.json();
+      
       if (data.length === 0) {
         setHasMore(false);
       } else {
@@ -81,7 +82,7 @@ return()=>{
 
 
   return (
-    <div className="flex flex-col gap-4">  
+    <div className="flex flex-col gap-4 w-full h-full">  
      <header className="flex items-center justify-between w-full">
         <Logo />
         <Button variant="ghost" size="icon" asChild className="lg:hidden">
@@ -93,7 +94,7 @@ return()=>{
      <h1 id="feed-title" className="text-3xl font-bold tracking-tight">
           Discover
         </h1>
-    <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto md:p-4">
+    <div className=" w-auto h-auto grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto md:p-4">
       {posts.map((post) => (
         <Card className="overflow-hidden flex flex-col w-full h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
       {post.imageUrl && (
@@ -166,7 +167,11 @@ return()=>{
     </div>
     
       {loading && (
-        <div className="text-gray-500 flex justify-center items-center w-full h-full bg-gray-600"></div>
+        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-2">
+          <div className="rounded-lg animate-pulse duration-800 flex justify-center items-center w-full h-full bg-neutral-300"></div>
+          <div className="rounded-lg animate-pulse duration-800 flex justify-center items-center w-full h-full bg-neutral-300"></div>
+        </div>
+
       )}
 
       {hasMore && <div ref={observerRef} className="h-10" />}
