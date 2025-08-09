@@ -76,9 +76,9 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md mx-auto mt-10">
+    <div className="w-full max-w-md p-8 space-y-8 bg-background border rounded-lg shadow-md mx-auto mt-10">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900">Sign In</h2>
+        <h2 className="text-2xl font-bold text-primary">Sign In</h2>
         <p className="mt-2 text-sm text-gray-600">
           SignIn to get started with your account
         </p>

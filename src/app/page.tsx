@@ -4,11 +4,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowUpRightIcon, HeartIcon, MessageCircleIcon, SettingsIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-
+import Airoute from "@/components/shared/airoute";
+import Createpost from "@/components/home/createpost";
 
 type Post = {
   id: string;
@@ -180,6 +180,8 @@ return()=>{
           You’ve reached the end.
         </p>
       )}
+<Airoute/>
+      <Createpost/>
     </div>  
   );
 }
