@@ -8,7 +8,7 @@ import * as z from "zod";
 // import { useDebounceCallback } from "usehooks-ts";
 import { useToast } from "@/hooks/use-toast";
 
-import { redirect,useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 // import axios, { AxiosError } from "axios";
 import { signInSchema } from "@/schemas/signInSchema";
 // import { ApiResponse } from "@/types/ApiRespones";
@@ -48,6 +48,7 @@ const router = useRouter();
     redirect: false,
     identifier: data.identifier,
     password: data.password,
+    callbackUrl:"/profile"
    })
    if(result?.error){
     if(result.error === "CredentialsSignin"){
@@ -70,7 +71,7 @@ const router = useRouter();
   }
 
   if(result?.url){
-    router.push('/profile')
+    router.push(result.url||'/profile')
   }
 toast({
   title:"Login successful",
