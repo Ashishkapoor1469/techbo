@@ -10,7 +10,7 @@ const Createpost = () => {
         asChild
       >
         {/* Using Link to navigate to recommendations page */}
-        <Link href={"/createpost"} className="flex items-center gap-2">
+        <Link href={"/createposts"} className="flex items-center gap-2">
           <Plus className="h-4 w-4 text-primary-foreground" />
         </Link>
       </Button>
