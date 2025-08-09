@@ -31,7 +31,7 @@ const VerifyAccount = () => {
         title: "Success",
         description: res.data.message,
       });
-      router.replace("profile");
+      router.replace("/profile");
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
