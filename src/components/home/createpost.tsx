@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Createpost = () => {
   return (
    <Button
-        className=" md:hidden block fixed bottom-32  right-4 z-50 bg-primary text-white hover:bg-primary/90 transition-colors"
+        className=" md:hidden block fixed bottom-20  right-4 z-50 bg-primary text-white hover:bg-primary/90 transition-colors"
         asChild
       >
         {/* Using Link to navigate to recommendations page */}

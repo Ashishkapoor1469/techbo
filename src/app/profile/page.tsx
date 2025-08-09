@@ -15,6 +15,7 @@ import { ItemCard } from "@/components/shared/item-card"; // Re-use ItemCard for
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Createpost from "@/components/home/createpost";
 
 
 // const [data, setdata] = useState({});
@@ -227,6 +228,7 @@ export default function ProfilePage() {
           )}
         </TabsContent>
       </Tabs>
+       <Createpost/>
     </div>
   );
 }

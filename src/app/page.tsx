@@ -181,7 +181,6 @@ return()=>{
         </p>
       )}
 <Airoute/>
-      <Createpost/>
     </div>  
   );
 }
