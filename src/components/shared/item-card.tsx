@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Link from "next/link";
 import {
   Card,
@@ -41,12 +41,12 @@ export function ItemCard({ item, type }: ItemCardProps) {
         {logoUrl && (
           <Link href={detailUrl} passHref>
             <div className="relative h-16 w-16 shrink-0 cursor-pointer">
-              <Image
+              <img
                 src={logoUrl}
                 alt={`${name} logo`}
-                fill={true}
+                // fill={true}
                 style={{ objectFit: "contain" }}
-                className="rounded-md"
+                className="rounded-md object-cover"
                 data-ai-hint={dataAiHint}
               />
             </div>

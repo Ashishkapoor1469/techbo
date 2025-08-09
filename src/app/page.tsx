@@ -4,7 +4,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowUpRightIcon, HeartIcon, Loader2, MessageCircleIcon, SettingsIcon } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ArrowUpRightIcon, HeartIcon, MessageCircleIcon, SettingsIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 
@@ -92,9 +93,9 @@ return()=>{
      <h1 id="feed-title" className="text-3xl font-bold tracking-tight">
           Discover
         </h1>
-    <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto p-4 ">
+    <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto md:p-4">
       {posts.map((post) => (
-        <Card className="overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
+        <Card className="overflow-hidden flex flex-col w-full h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
       {post.imageUrl && (
         <Link href={post.imageUrl || '#'} passHref legacyBehavior>
         <a className="block aspect-video relative overflow-hidden">
@@ -103,7 +104,7 @@ return()=>{
               alt={post.title}
             
               style={{objectFit: 'cover'}}
-              className="hover:scale-105 transition-transform duration-300 object-cover content-center"
+              className="hover:scale-105 transition-transform duration-300 object-fill w-full h-full"
               data-ai-hint={post.timestamp}
             />
           </a>
@@ -119,7 +120,7 @@ return()=>{
               </Avatar>
               <div>
                 <CardTitle className="text-lg hover:text-primary transition-colors">{post.author.name}</CardTitle>
-                <p className="text-xs text-muted-foreground">{post.timestamp}</p>
+                <p className="text-xs text-muted-foreground">Date:{post.timestamp?.slice(0, 16).replace("T", " Time:")}</p>
               </div>
             </a>
           </Link>
@@ -162,8 +163,10 @@ return()=>{
     </Card>
       ))}
 
+    </div>
+    
       {loading && (
-        <div className="text-gray-500 flex justify-center py-4"><Loader2 className="animate-spin h-7 w-7"/></div>
+        <div className="text-gray-500 flex justify-center items-center w-full h-full bg-gray-600"></div>
       )}
 
       {hasMore && <div ref={observerRef} className="h-10" />}
@@ -172,7 +175,6 @@ return()=>{
           You’ve reached the end.
         </p>
       )}
-    </div>
     </div>  
   );
 }

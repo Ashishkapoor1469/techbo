@@ -9,7 +9,6 @@ export const PostSchema = z.object({
     .max(100, "Title must be less than 100 characters"),
   author: z.string(),
   imageUrl: z.string().url().optional(),
-  dataAiHint: z.string().optional(),
   timestamp: z.string().datetime({ offset: true }).optional(),
   tags: z.array(z.string()).optional(),
   likes: z.number().int().nonnegative().default(0),
