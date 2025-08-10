@@ -55,6 +55,6 @@ This project is licensed under the [MIT License](./LICENSE).
 ```bash
 git clone https://github.com/Ashishkapoor1469/techbo.git
 cd codeaxe
-pnpm install  # or yarn / npm
+npm install  # or yarn / pnpm
 
 
