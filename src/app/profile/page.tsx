@@ -118,7 +118,7 @@ export default function ProfilePage() {
                 className="object-cover"
               />
               <AvatarFallback>
-                {user?.name.substring(0, 2).toUpperCase()}
+                {(user?.name ?? "").substring(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1">
@@ -204,9 +204,9 @@ export default function ProfilePage() {
           )}
         </TabsContent>
         <TabsContent value="frameworks" className="mt-6">
-          {user?.userFrameworks && user?.userFrameworks.length > 0 ? (
+          {user?.frameworks && user?.frameworks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {user?.Post.map((fw) => (
+              {user?.frameworks.map((fw) => (
                 <ItemCard key={fw.id} item={fw} type="framework" />
               ))}
             </div>
@@ -217,9 +217,9 @@ export default function ProfilePage() {
           )}
         </TabsContent>
         <TabsContent value="packages" className="mt-6">
-          {user?.userPackages && user?.userPackages.length > 0 ? (
+          {user?.packages && user?.packages.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {user?.userPackages.map((pkg) => (
+              {user?.packages.map((pkg) => (
                 <ItemCard key={pkg.id} item={pkg} type="package" />
               ))}
             </div>

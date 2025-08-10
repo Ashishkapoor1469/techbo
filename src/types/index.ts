@@ -87,6 +87,8 @@ export interface UserProfile {
   verifyTokenExpiry?: Date;
   Post: Post[]; // user posts
   Messages: Message[]; // user messages
+  frameworks:Framework[];
+  packages:Package[];
 }
 
 
