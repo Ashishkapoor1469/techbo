@@ -55,23 +55,40 @@ export interface Package {
   exampleUrl?: string; // Link to a more comprehensive example or demo
 }
 
+export interface Message {
+  id: string; // MongoDB _id as string
+  senderId: string; // User ID of the sender
+  receiverId: string; // User ID of the receiver
+  content: string; // The actual message text
+  createdAt: string; // ISO date string
+  updatedAt?: string; // Optional if message is edited
+  isRead: boolean; // Whether the receiver has read it
+}
 export interface UserProfile {
-  id: string;
   name: string;
   username: string;
-  avatarUrl: string;
-  dataAiHint?: string;
-  bio: string;
+  avatarUrl?: string;
+  bio?: string;
   postsCount: number;
   followersCount: number;
   followingCount: number;
-  joinedDate: string;
+  email: string;
+  password: string;
   location?: string;
   websiteUrl?: string;
-  userPosts?: Post[];
-  userFrameworks?: Framework[]; // Note: These would be simplified versions for profile display
-  userPackages?: Package[]; // Note: These would be simplified versions for profile display
+  createdAt?: Date;
+  updatedAt?: Date ;
+  isAdmin?: boolean;
+  isAcceptingMessage?: boolean;
+  isVerified: boolean;
+  forgotPasswordToken?: string;
+  forgotPasswordExpiry?: Date;
+  verifyToken?: string;
+  verifyTokenExpiry?: Date;
+  Post: Post[]; // user posts
+  Messages: Message[]; // user messages
 }
+
 
 // Simplified versions for profile lists, if needed, to avoid deeply nested full objects.
 // For now, UserProfile uses the full types.

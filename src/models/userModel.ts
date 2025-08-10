@@ -23,9 +23,17 @@ export interface IuserPost extends Document {
   link?: string;
 }
 export interface IUser extends Document {
+  name: string;
   username: string;
+  avatarUrl?: string;
+  bio?: string;
+  postsCount: number;
+  followersCount: number;
+  followingCount: number;
   email: string;
   password: string;
+  location?: string;
+  websiteUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
   isAdmin?: boolean;
@@ -74,11 +82,20 @@ const PostSchema: Schema = new mongoose.Schema({
 });
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
+  name: {
+    type: String,
+  },
   username: {
     type: String,
     required: [true, "Username is required"],
     unique: true,
   },
+  avatarUrl: String,
+  bio: {
+    type:String,
+    default:"Welcome to my Profile"
+  },
+
   email: {
     type: String,
     required: [true, "Email is required"],
@@ -89,6 +106,9 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     required: [true, "Password is required"],
     minlength: [6, "Password must be at least 6 characters long"],
   },
+  postsCount: { type: Number, default: 0 },
+  followersCount: { type: Number, default: 0 },
+  followingCount: { type: Number, default: 0 },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -97,6 +117,8 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  location: String,
+  websiteUrl: String,
   isAdmin: {
     type: Boolean,
     default: false,
@@ -121,6 +143,7 @@ const User =
   mongoose.model<IUser>("user", userSchema);
 export default User;
 
-const Post = (mongoose.models.Post as mongoose.Model<IuserPost>) ||
+const Post =
+  (mongoose.models.Post as mongoose.Model<IuserPost>) ||
   mongoose.model<IuserPost>("Post", PostSchema);
-  export { Post };
+export { Post };

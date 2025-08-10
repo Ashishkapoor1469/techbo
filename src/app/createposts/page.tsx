@@ -9,8 +9,21 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const PostSchema = z.object({
   id: z.string().min(1, "Post ID is required"),
@@ -111,7 +124,9 @@ export default function CreatePostPage() {
     <div className="flex justify-center items-center min-h-screen bg-background border p-4">
       <Card className="w-full max-w-2xl shadow-lg border border-gray-200">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Create a New Post</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            Create a New Post
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -230,7 +245,9 @@ export default function CreatePostPage() {
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
+                  onChange={(e) =>
+                    handleFileSelect(e.target.files?.[0] || null)
+                  }
                 />
               </div>
 
