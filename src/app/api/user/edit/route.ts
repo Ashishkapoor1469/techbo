@@ -1,14 +1,17 @@
+// app/api/user/profile/route.ts
 import { NextResponse } from "next/server";
 import { dbconnect } from "@/lib/dbConnection";
 import User from "@/models/userModel";
 import { getServerSession } from "next-auth";
+import { authOption } from "../../auth/[...nextauth]/options"; // path to your NextAuth config
 import bcrypt from "bcryptjs";
 
 export async function PATCH(req: Request) {
   await dbconnect();
 
   try {
-    const session = await getServerSession();
+    // ✅ Get session with proper config
+    const session = await getServerSession(authOption);
     if (!session?.user?.email) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -24,13 +27,13 @@ export async function PATCH(req: Request) {
       password
     } = body;
 
-    // Find user
-    const user = await User.findOne({ email: session.user.email });
+    // ✅ Select password explicitly if schema has select: false
+    const user = await User.findOne({ email: session.user.email }).select("+password");
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // Update fields (skip updatedAt — Mongo timestamps handle it)
+    // ✅ Update fields
     if (name) user.name = name;
     if (username) user.username = username;
     if (bio !== undefined) user.bio = bio;
@@ -38,17 +41,24 @@ export async function PATCH(req: Request) {
     if (websiteUrl !== undefined) user.websiteUrl = websiteUrl;
     if (avatarUrl) user.avatarUrl = avatarUrl;
 
-    // If password provided, hash it
+    // ✅ If password provided, hash it
     if (password && password.trim() !== "") {
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
     }
 
-    await user.save();
+    // ✅ Save and check result
+    const updatedUser = await user.save();
+    if (!updatedUser) {
+      return NextResponse.json({ message: "Failed to update profile" }, { status: 500 });
+    }
 
     return NextResponse.json({ message: "Profile updated successfully" });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    console.error("PATCH /user/profile error:", error);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

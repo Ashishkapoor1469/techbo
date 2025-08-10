@@ -19,7 +19,6 @@ import {
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import Airoute from "@/components/shared/airoute";
-import Createpost from "@/components/home/createpost";
 
 type Post = {
   id: string;
@@ -38,6 +37,9 @@ type Post = {
   link?: string;
 };
 
+const CACHE_KEY = "post_cache";
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
 export default function PostList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [skip, setSkip] = useState(0);
@@ -45,18 +47,41 @@ export default function PostList() {
   const [loading, setLoading] = useState(false);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
-  const fetchPost = async () => {
+  const fetchPost = async (isFirstLoad = false) => {
     if (loading || !hasMore) return;
     setLoading(true);
+
     try {
+      // First load → try cache
+      if (isFirstLoad) {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { posts: cachedPosts, timestamp } = JSON.parse(cached);
+          if (Date.now() - timestamp < CACHE_DURATION) {
+            setPosts(cachedPosts);
+            setSkip(cachedPosts.length);
+            setLoading(false);
+            return; // Cache still fresh → no API call
+          }
+        }
+      }
+
+      // Fetch new posts
       const res = await fetch(`/api/posts?skip=${skip}&limit=10`);
       const data: Post[] = await res.json();
 
       if (data.length === 0) {
         setHasMore(false);
       } else {
-        setPosts((prev) => [...prev, ...data]);
+        const newPosts = isFirstLoad ? data : [...posts, ...data];
+        setPosts(newPosts);
         setSkip((prev) => prev + 10);
+
+        // Save to cache
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({ posts: newPosts, timestamp: Date.now() })
+        );
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -65,10 +90,12 @@ export default function PostList() {
     }
   };
 
+  // Load cache or fetch first posts
   useEffect(() => {
-    fetchPost();
+    fetchPost(true);
   }, []);
 
+  // Infinite scroll observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -76,19 +103,11 @@ export default function PostList() {
           fetchPost();
         }
       },
-      {
-        rootMargin: "200px",
-      }
+      { rootMargin: "200px" }
     );
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, [observerRef.current, hasMore, loading]);
+    if (observerRef.current) observer.observe(observerRef.current);
+    return () => observer.disconnect();
+  }, [hasMore, loading]);
 
   return (
     <div className="flex flex-col gap-4 w-full h-full">
@@ -103,18 +122,20 @@ export default function PostList() {
       <h1 id="feed-title" className="text-3xl font-bold tracking-tight">
         Discover
       </h1>
-      <div className=" w-auto h-auto grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto md:p-4">
+
+      <div className="w-auto h-auto grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto md:p-4">
         {posts.map((post) => (
-          <Card className="overflow-hidden flex flex-col w-full h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl">
+          <Card
+            key={post.id}
+            className="overflow-hidden flex flex-col w-full h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl"
+          >
             {post.imageUrl && (
               <Link href={post.imageUrl || "#"} passHref legacyBehavior>
                 <a className="block aspect-video relative overflow-hidden">
                   <img
                     src={post.imageUrl}
                     alt={post.title}
-                    style={{ objectFit: "cover" }}
-                    className="hover:scale-105 transition-transform duration-300 object-fill w-full h-full"
-                    data-ai-hint={post.timestamp}
+                    className="hover:scale-105 transition-transform duration-300 object-cover w-full h-full"
                   />
                 </a>
               </Link>
@@ -137,8 +158,7 @@ export default function PostList() {
                         {post.author.name}
                       </CardTitle>
                       <p className="text-xs text-muted-foreground">
-                        Date:
-                        {post.timestamp?.slice(0, 16).replace("T", " Time:")}
+                        Date: {post.timestamp?.slice(0, 16).replace("T", " Time:")}
                       </p>
                     </div>
                   </a>
@@ -168,19 +188,11 @@ export default function PostList() {
             </CardContent>
             <CardFooter className="flex justify-between items-center border-t pt-4">
               <div className="flex gap-4 text-muted-foreground">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-1.5 group"
-                >
+                <Button variant="ghost" size="sm" className="flex items-center gap-1.5 group">
                   <HeartIcon className="h-4 w-4 group-hover:fill-red-500 group-hover:text-red-500 transition-colors" />
                   <span className="text-xs">{post.likes}</span>
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-1.5 group"
-                >
+                <Button variant="ghost" size="sm" className="flex items-center gap-1.5 group">
                   <MessageCircleIcon className="h-4 w-4 group-hover:text-primary transition-colors" />
                   <span className="text-xs">{post.comments}</span>
                 </Button>
@@ -199,16 +211,14 @@ export default function PostList() {
 
       {loading && (
         <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-2">
-          <div className="rounded-lg animate-pulse duration-800 w-full h-full backdrop-blur-lg shadow-xl bg-neutral-300"></div>
-          <div className="rounded-lg animate-pulse duration-800 w-full h-full backdrop-blur-lg shadow-xl bg-neutral-300"></div>
+          <div className="rounded-lg animate-pulse w-full h-full bg-neutral-300"></div>
+          <div className="rounded-lg animate-pulse w-full h-full bg-neutral-300"></div>
         </div>
       )}
 
       {hasMore && <div ref={observerRef} className="h-10" />}
       {!hasMore && (
-        <p className="text-center w-full text-gray-500 py-4">
-          You’ve reached the end.
-        </p>
+        <p className="text-center w-full text-gray-500 py-4">You’ve reached the end.</p>
       )}
       <Airoute />
     </div>

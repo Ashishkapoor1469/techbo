@@ -11,29 +11,56 @@ import {
   Verified,
 } from "lucide-react";
 import type { UserProfile } from "@/types";
-import { PostCard } from "@/components/home/post-card"; // Re-use PostCard for user posts
-import { ItemCard } from "@/components/shared/item-card"; // Re-use ItemCard for user frameworks/packages
+import { PostCard } from "@/components/home/post-card";
+import { ItemCard } from "@/components/shared/item-card";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Createpost from "@/components/home/createpost";
-import { number } from "zod";
+
+const CACHE_KEY = "user_profile_cache";
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 export default function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    fetch("/api/user")
-      .then((res) => res.json())
-      .then((data) => setUser(data));
+    const fetchUser = async () => {
+      // Try cache first
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_DURATION) {
+          setUser(data);
+          return; // Still fresh → no API call
+        }
+      }
+
+      // Fetch fresh data
+      const res = await fetch("/api/user");
+      const data = await res.json();
+      setUser(data);
+
+      // Save to cache
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({ data, timestamp: Date.now() })
+      );
+    };
+
+    fetchUser();
   }, []);
 
-  if(!user) return <div className="flex flex-col w-full h-full gap-4">
-    <div className="w-full h-full bg-neutral-300 animate-pulse shadow-sm rounded-xl"></div>
-    <div className="w-full h-full flex gap-4">
-      <div className="w-full h-full bg-neutral-300 animate-pulse shadow-xl rounded-xl"></div>
-      <div className="w-full h-full bg-neutral-300 animate-pulse shadow-xl rounded-xl"></div>
-    </div>
-  </div>;
+  if (!user)
+    return (
+      <div className="flex flex-col w-full h-full gap-4">
+        <div className="w-full h-full bg-neutral-300 animate-pulse shadow-sm rounded-xl"></div>
+        <div className="w-full h-full flex gap-4">
+          <div className="w-full h-full bg-neutral-300 animate-pulse shadow-xl rounded-xl"></div>
+          <div className="w-full h-full bg-neutral-300 animate-pulse shadow-xl rounded-xl"></div>
+        </div>
+      </div>
+    );
+
   return (
     <div className="space-y-8">
       <Card className="overflow-hidden shadow-lg rounded-xl">
@@ -46,15 +73,19 @@ export default function ProfilePage() {
                 className="object-cover"
               />
               <AvatarFallback>
-                {(user?.name ?user.name :user.username).substring(0, 2).toUpperCase()}
+                {(user?.name ? user.name : user.username)
+                  .substring(0, 2)
+                  .toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row justify-between items-start">
                 <div>
                   <h1 className="text-3xl font-bold flex gap-2 items-center justify-center">
-                    {user?.name?user.name:user.username.split(/\d/)[0]}{" "}
-                    {user?.isAdmin ? <div><Verified/></div> : <div></div>}{" "}
+                    {user?.name
+                      ? user.name
+                      : user.username.split(/\d/)[0]}{" "}
+                    {user?.isAdmin && <Verified />}
                   </h1>
                   <p className="text-muted-foreground">@{user?.username}</p>
                 </div>
@@ -123,7 +154,9 @@ export default function ProfilePage() {
         <TabsContent value="posts" className="mt-6">
           {user?.Post && user?.Post.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-              {user?.Post.map((post) => <PostCard key={post.id} post={post} />)}
+              {user?.Post.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
             </div>
           ) : (
             <p className="text-muted-foreground text-center py-8">
