@@ -14,81 +14,9 @@ import type { UserProfile } from "@/types";
 import { PostCard } from "@/components/home/post-card"; // Re-use PostCard for user posts
 import { ItemCard } from "@/components/shared/item-card"; // Re-use ItemCard for user frameworks/packages
 import Link from "next/link";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Createpost from "@/components/home/createpost";
-
-// // const [data, setdata] = useState({});
-//  const mockUserProfile: UserProfile = {
-//   id: "user123",
-//   name: "Ashish kapoor",
-//   username: "ashishkapoor123",
-//   avatarUrl: "https://wallpapershome.com/images/pages/ico_h/16173.jpg",
-//   dataAiHint: "profile picture",
-//   bio: "Full-stack developer passionate about open-source and building modern web applications. Exploring GenAI.",
-//   postsCount: 4,
-//   followersCount: 1200,
-//   followingCount: 250,
-//   joinedDate: "Joined March 2025",
-//   location: "Himachal perdesh, Chamba",
-//   websiteUrl: "https://portfolio-phi-ivory-91.vercel.app/",
-//   userPosts: [
-//     {
-//       id: "p1",
-//       type: "article",
-//       title: "My Top 3 Dev Tools",
-//       excerpt: "Sharing tools I use daily.",
-//       author: {
-//         name: "Alex Johnson",
-//         avatarUrl:
-//           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3uyGC8BAZpeOpAnLAyHHz0xeNQlNup1v9A&s",
-//         profileUrl: "/profile",
-//       },
-//       timestamp: "3 days ago",
-//       likes: 15,
-//       comments: 2,
-//       imageUrl:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD3uyGC8BAZpeOpAnLAyHHz0xeNQlNup1v9A&s",
-//       dataAiHint: "desk setup",
-//     },
-//   ],
-//   userFrameworks: [
-//     {
-//       id: "nextjs-fav",
-//       name: "Next.js",
-//       description: "Primary framework for web apps.",
-//       logoUrl:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMZD7gtOg-aRXiYZ_ZkmYGch46UxHAygL-Pw&s",
-//       dataAiHint: "nextjs logo",
-//       tags: ["React"],
-//       websiteUrl: "#",
-//       rating: 4.9,
-
-//     },
-//   ],
-//   userPackages: [
-//     {
-//       id: "zod-fav",
-//       name: "Zod",
-//       description: "For schema validation.",
-//       logoUrl: "https://zod.dev/?id=basic-usage",
-//       dataAiHint: "zod logo",
-//       version: "3.23",
-//       tags: ["Validation"],
-//       repositoryUrl: "#",
-//     },
-//   ],
-// };
-
-// useEffect(()=>{
-// axios.get("/api/userdetails")
-// .then((response) => {
-//   setdata(response.data);
-// }
-// ).catch((error) => {
-//   console.error("Error fetching user details:", error);
-// });
-// },[])
+import { number } from "zod";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -118,15 +46,15 @@ export default function ProfilePage() {
                 className="object-cover"
               />
               <AvatarFallback>
-                {(user?.name ?? "").substring(0, 2).toUpperCase()}
+                {(user?.name ?user.name :user.username).substring(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row justify-between items-start">
                 <div>
                   <h1 className="text-3xl font-bold flex gap-2 items-center justify-center">
-                    {user?.name}{" "}
-                    {user?.isVerified ? <div><Verified/></div> : <div></div>}{" "}
+                    {user?.name?user.name:user.username.split(/\d/)[0]}{" "}
+                    {user?.isAdmin ? <div><Verified/></div> : <div></div>}{" "}
                   </h1>
                   <p className="text-muted-foreground">@{user?.username}</p>
                 </div>
